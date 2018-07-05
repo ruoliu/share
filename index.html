@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>二维码分享xx</title>
+		<title>新手送好礼</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<script src="js/qrcode.min.js"></script>
@@ -50,6 +50,30 @@
 				margin-top:10px;
 				text-align: center;
 			}
+			/*引导页*/
+			.yindao{
+				height:100%;
+				width:100%;
+				background-color: rgba(0,0,0,.7);
+				position: absolute;
+				z-index:100;
+				top:0;
+				left:0;
+				
+			}
+			.yindao img{
+				position: absolute;
+				top:5px;
+				right:30px;
+
+			}
+			.yindao p{
+				color:#fff;
+				position:absolute;
+				top:100px;
+				right:60px;
+				font-weight: 700;
+			}
 			@media only screen and (min-width: 768px) {
 				#qrcode {
 					width:40%;
@@ -65,7 +89,10 @@
 				<div id="qrcode"></div>
 				<p>长按二维码 领取现金</p>
 			</div>
-			
+			<div class="yindao" style='display:none;'>
+				<img src="arrow-top.png" alt="" />
+				<p>点击此处，在浏览器打开</p>
+			</div>
 		</div>
 
 		<script>
@@ -81,6 +108,15 @@
 						correctLevel: QRCode.CorrectLevel.H
 					});
 				}
+				function isWeiXin(){
+					var u = navigator.userAgent.toLowerCase();
+					 if (u.match(/MicroMessenger/i) == 'micromessenger') {
+						$('.yindao').css('display','block')
+				      } else {
+				      	$('.yindao').css('display','none')
+				      }
+				}
+				isWeiXin();
 				function checkSys(){
 					var u = navigator.userAgent;
 					var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
@@ -88,7 +124,7 @@
 					if(isAndroid) {
 						createQrcode('http://p8k3g6ei8.bkt.clouddn.com/app-release.apk')
 					} else if(isiOS) {
-						createQrcode('http://p8k3g6ei8.bkt.clouddn.com/app-release.apk')
+						createQrcode('https://itunes.apple.com/cn/app/id1404763948?mt=8')
 					} else {
 						createQrcode('http://p8k3g6ei8.bkt.clouddn.com/app-release.apk')
 					}
